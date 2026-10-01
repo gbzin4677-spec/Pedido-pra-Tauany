@@ -1,0 +1,1600 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080008">
+
+<title>Uma pergunta para você ❤️</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+    width:100%;
+    height:100%;
+}
+
+body{
+    overflow:hidden;
+    font-family:"DM Sans",sans-serif;
+    color:white;
+    background:#080008;
+}
+
+/* =========================
+   FUNDO
+========================= */
+
+.background{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    background:
+        radial-gradient(
+            circle at 50% 42%,
+            rgba(180,0,45,.45),
+            transparent 34%
+        ),
+        radial-gradient(
+            circle at 15% 85%,
+            rgba(255,0,80,.16),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 85% 15%,
+            rgba(255,30,90,.14),
+            transparent 35%
+        ),
+        #080008;
+}
+
+.background::before{
+    content:"";
+    position:absolute;
+    inset:-50%;
+    background:
+        repeating-conic-gradient(
+            from 0deg,
+            rgba(255,255,255,.018) 0deg 8deg,
+            transparent 8deg 16deg
+        );
+    animation:rotateBg 35s linear infinite;
+}
+
+@keyframes rotateBg{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+.light{
+    position:absolute;
+    width:420px;
+    height:420px;
+    border-radius:50%;
+    background:#ff174f;
+    filter:blur(150px);
+    opacity:.12;
+    animation:lightMove 8s ease-in-out infinite alternate;
+}
+
+.light.one{
+    left:-180px;
+    top:10%;
+}
+
+.light.two{
+    right:-180px;
+    bottom:0;
+    animation-delay:-4s;
+}
+
+@keyframes lightMove{
+    from{
+        transform:translate(0,0) scale(.8);
+    }
+
+    to{
+        transform:translate(100px,-80px) scale(1.25);
+    }
+}
+
+/* =========================
+   ESTRELAS
+========================= */
+
+.stars{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+}
+
+.star{
+    position:absolute;
+    width:3px;
+    height:3px;
+    background:white;
+    border-radius:50%;
+    opacity:.2;
+    animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+    from{
+        opacity:.1;
+        transform:scale(.7);
+    }
+
+    to{
+        opacity:.8;
+        transform:scale(1.5);
+    }
+}
+
+/* =========================
+   CORAÇÕES
+========================= */
+
+#hearts{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+}
+
+.heart{
+    position:absolute;
+    bottom:-80px;
+    animation:heartUp linear forwards;
+    opacity:0;
+    user-select:none;
+    filter:drop-shadow(0 0 8px rgba(255,20,70,.65));
+}
+
+@keyframes heartUp{
+    0%{
+        transform:
+            translateY(0)
+            translateX(0)
+            rotate(0deg)
+            scale(.5);
+        opacity:0;
+    }
+
+    12%{
+        opacity:.75;
+    }
+
+    50%{
+        transform:
+            translateY(-55vh)
+            translateX(35px)
+            rotate(120deg)
+            scale(1);
+    }
+
+    100%{
+        transform:
+            translateY(-120vh)
+            translateX(-50px)
+            rotate(300deg)
+            scale(1.35);
+        opacity:0;
+    }
+}
+
+/* =========================
+   TELA
+========================= */
+
+.app{
+    position:relative;
+    z-index:5;
+    min-height:100vh;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.card{
+    width:min(760px,94vw);
+    min-height:600px;
+
+    padding:42px 30px;
+
+    position:relative;
+    overflow:hidden;
+
+    border-radius:38px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.96),
+            rgba(255,244,247,.93)
+        );
+
+    border:1px solid rgba(255,255,255,.8);
+
+    box-shadow:
+        0 35px 100px rgba(0,0,0,.65),
+        0 0 80px rgba(255,0,70,.15);
+
+    color:#171217;
+
+    text-align:center;
+
+    animation:cardIn 1s cubic-bezier(.16,1,.3,1);
+}
+
+.card::before{
+    content:"";
+    position:absolute;
+    width:300px;
+    height:300px;
+    border-radius:50%;
+    background:#ff2456;
+    filter:blur(110px);
+    opacity:.08;
+    top:-170px;
+    right:-100px;
+}
+
+.card::after{
+    content:"";
+    position:absolute;
+    width:250px;
+    height:250px;
+    border-radius:50%;
+    background:#ff174f;
+    filter:blur(100px);
+    opacity:.06;
+    bottom:-150px;
+    left:-100px;
+}
+
+@keyframes cardIn{
+    from{
+        opacity:0;
+        transform:
+            translateY(45px)
+            scale(.82);
+        filter:blur(8px);
+    }
+
+    to{
+        opacity:1;
+        transform:
+            translateY(0)
+            scale(1);
+        filter:blur(0);
+    }
+}
+
+/* =========================
+   PÁGINAS
+========================= */
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+    animation:pageIn .7s cubic-bezier(.16,1,.3,1);
+}
+
+@keyframes pageIn{
+    from{
+        opacity:0;
+        transform:scale(.88) translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1) translateY(0);
+    }
+}
+
+/* =========================
+   TOPO
+========================= */
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+
+    padding:8px 15px;
+
+    border-radius:100px;
+
+    background:#fff0f3;
+    border:1px solid #ffd4dd;
+
+    color:#df1646;
+
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.5px;
+}
+
+/* =========================
+   CORAÇÃO
+========================= */
+
+.heartStage{
+    width:205px;
+    height:205px;
+
+    margin:24px auto;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    position:relative;
+}
+
+.ring{
+    position:absolute;
+    inset:0;
+
+    border-radius:50%;
+
+    border:1px solid rgba(230,0,55,.12);
+
+    animation:ringPulse 3s infinite;
+}
+
+.ring:nth-child(2){
+    inset:12px;
+    animation-delay:.4s;
+}
+
+.ring:nth-child(3){
+    inset:25px;
+    animation-delay:.8s;
+}
+
+@keyframes ringPulse{
+    0%,100%{
+        transform:scale(1);
+        opacity:.3;
+    }
+
+    50%{
+        transform:scale(1.08);
+        opacity:.8;
+    }
+}
+
+.mainHeart{
+    width:140px;
+    height:140px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    border-radius:40px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff,
+            #ffe4ea
+        );
+
+    box-shadow:
+        0 20px 45px rgba(200,0,50,.18),
+        inset 0 0 0 1px rgba(255,255,255,.8);
+
+    font-size:76px;
+
+    animation:heartFloat 3s ease-in-out infinite;
+}
+
+@keyframes heartFloat{
+    0%,100%{
+        transform:translateY(0) rotate(-2deg);
+    }
+
+    50%{
+        transform:translateY(-10px) rotate(2deg);
+    }
+}
+
+/* =========================
+   TEXTOS
+========================= */
+
+h1{
+    font-family:"Playfair Display",serif;
+
+    font-size:
+        clamp(
+            32px,
+            6vw,
+            54px
+        );
+
+    line-height:1.08;
+
+    letter-spacing:-1px;
+
+    color:#171217;
+}
+
+.gradientText{
+    background:
+        linear-gradient(
+            90deg,
+            #b50035,
+            #ff2759,
+            #b50035
+        );
+
+    background-size:200%;
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+
+    animation:textGradient 4s linear infinite;
+}
+
+@keyframes textGradient{
+    to{
+        background-position:200%;
+    }
+}
+
+.description{
+    max-width:540px;
+
+    margin:16px auto 0;
+
+    color:#777;
+
+    font-size:15px;
+
+    line-height:1.7;
+}
+
+.question{
+    margin-top:15px;
+
+    color:#c60039;
+
+    font-size:18px;
+
+    font-weight:700;
+}
+
+/* =========================
+   BOTÕES
+========================= */
+
+.buttons{
+    position:relative;
+
+    width:100%;
+
+    height:75px;
+
+    margin-top:30px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    gap:18px;
+}
+
+button{
+    border:0;
+    outline:0;
+
+    font-family:inherit;
+
+    cursor:pointer;
+
+    user-select:none;
+
+    font-size:16px;
+    font-weight:700;
+
+    border-radius:15px;
+
+    padding:16px 38px;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.yes{
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #08c95b,
+            #00a845
+        );
+
+    box-shadow:
+        0 12px 25px rgba(0,170,70,.28);
+}
+
+.yes:hover{
+    transform:
+        translateY(-3px)
+        scale(1.05);
+
+    box-shadow:
+        0 18px 35px rgba(0,170,70,.4);
+}
+
+.no{
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff435a,
+            #d91138
+        );
+
+    box-shadow:
+        0 12px 25px rgba(220,0,50,.2);
+}
+
+.secondary{
+    background:#171217;
+    color:white;
+
+    box-shadow:
+        0 12px 25px rgba(0,0,0,.2);
+}
+
+.hint{
+    min-height:25px;
+
+    margin-top:5px;
+
+    color:#d21845;
+
+    font-size:13px;
+
+    font-weight:600;
+}
+
+.counter{
+    margin-top:20px;
+
+    color:#aaa;
+
+    font-size:11px;
+}
+
+#attempts{
+    color:#d21845;
+    font-weight:700;
+}
+
+/* =========================
+   PÁGINA "TEM CERTEZA?"
+========================= */
+
+.confirmHeart{
+    width:180px;
+    height:180px;
+
+    margin:20px auto 25px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #fff,
+            #ffe1e8
+        );
+
+    box-shadow:
+        0 20px 50px rgba(190,0,50,.18);
+
+    font-size:82px;
+
+    animation:confirmFloat 2.5s ease-in-out infinite;
+}
+
+@keyframes confirmFloat{
+    0%,100%{
+        transform:translateY(0) scale(1);
+    }
+
+    50%{
+        transform:translateY(-9px) scale(1.04);
+    }
+}
+
+.loveQuotes{
+    max-width:570px;
+    margin:20px auto;
+}
+
+.quote{
+    padding:13px 18px;
+    margin:9px 0;
+
+    border-radius:15px;
+
+    background:#fff4f6;
+
+    border:1px solid #ffe0e6;
+
+    color:#6c5b60;
+
+    font-size:14px;
+}
+
+.quote span{
+    color:#df1646;
+    font-weight:bold;
+}
+
+.confirmButtons{
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    margin-top:22px;
+}
+
+/* =========================
+   SEGUNDA CHANCE
+========================= */
+
+.secondChanceIcon{
+    width:190px;
+    height:190px;
+
+    margin:15px auto 25px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #fff,
+            #ffe4e9
+        );
+
+    box-shadow:
+        0 25px 60px rgba(0,0,0,.15);
+
+    font-size:82px;
+
+    animation:shakeHeart 2s ease-in-out infinite;
+}
+
+@keyframes shakeHeart{
+    0%,100%{
+        transform:rotate(0);
+    }
+
+    15%{
+        transform:rotate(-7deg);
+    }
+
+    30%{
+        transform:rotate(7deg);
+    }
+
+    45%{
+        transform:rotate(-4deg);
+    }
+
+    60%{
+        transform:rotate(4deg);
+    }
+}
+
+.secondTitle{
+    font-family:"Playfair Display",serif;
+
+    font-size:
+        clamp(
+            32px,
+            7vw,
+            52px
+        );
+
+    color:#c60039;
+
+    line-height:1.1;
+}
+
+.secondText{
+    max-width:540px;
+
+    margin:18px auto;
+
+    color:#777;
+
+    font-size:16px;
+
+    line-height:1.8;
+}
+
+.plea{
+    font-size:18px;
+
+    color:#d21845;
+
+    font-weight:700;
+
+    margin-top:12px;
+}
+
+/* =========================
+   FINAL
+========================= */
+
+.successHeart{
+    width:190px;
+    height:190px;
+
+    margin:15px auto 25px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #fff,
+            #ffe0e8
+        );
+
+    box-shadow:
+        0 0 0 15px rgba(220,0,55,.035),
+        0 0 0 30px rgba(220,0,55,.02),
+        0 25px 60px rgba(0,0,0,.16);
+
+    font-size:90px;
+
+    animation:successPop .8s cubic-bezier(.16,1,.3,1);
+}
+
+@keyframes successPop{
+    from{
+        transform:scale(0);
+        opacity:0;
+    }
+
+    70%{
+        transform:scale(1.12);
+    }
+
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+.successTitle{
+    font-family:"Playfair Display",serif;
+
+    font-size:
+        clamp(
+            35px,
+            8vw,
+            58px
+        );
+
+    color:#c60039;
+}
+
+.successText{
+    max-width:520px;
+
+    margin:15px auto;
+
+    color:#6f6f6f;
+
+    line-height:1.8;
+
+    font-size:16px;
+}
+
+/* =========================
+   CONFETE
+========================= */
+
+.confetti{
+    position:fixed;
+
+    top:-40px;
+
+    z-index:100;
+
+    pointer-events:none;
+
+    animation:fall linear forwards;
+}
+
+@keyframes fall{
+    to{
+        transform:
+            translate3d(
+                var(--x),
+                110vh,
+                0
+            )
+            rotate(720deg);
+
+        opacity:0;
+    }
+}
+
+/* =========================
+   FLASH
+========================= */
+
+.flash{
+    position:fixed;
+    inset:0;
+
+    background:white;
+
+    z-index:90;
+
+    pointer-events:none;
+
+    opacity:0;
+}
+
+.flash.active{
+    animation:flash .55s ease;
+}
+
+@keyframes flash{
+    0%{opacity:0}
+    30%{opacity:.7}
+    100%{opacity:0}
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    .app{
+        padding:13px;
+    }
+
+    .card{
+        min-height:590px;
+        padding:28px 17px;
+        border-radius:30px;
+    }
+
+    .heartStage{
+        width:165px;
+        height:165px;
+        margin-top:18px;
+    }
+
+    .mainHeart{
+        width:115px;
+        height:115px;
+        font-size:62px;
+        border-radius:30px;
+    }
+
+    h1{
+        font-size:31px;
+    }
+
+    .description{
+        font-size:14px;
+    }
+
+    .question{
+        font-size:16px;
+    }
+
+    .buttons{
+        gap:10px;
+    }
+
+    button{
+        padding:15px 27px;
+        font-size:15px;
+    }
+
+    .confirmHeart,
+    .secondChanceIcon,
+    .successHeart{
+        width:150px;
+        height:150px;
+        font-size:70px;
+    }
+
+    .secondText,
+    .successText{
+        font-size:14px;
+    }
+
+    .quote{
+        font-size:13px;
+        padding:10px 13px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- FUNDO -->
+<div class="background">
+
+    <div class="light one"></div>
+    <div class="light two"></div>
+
+    <div class="stars" id="stars"></div>
+
+    <div id="hearts"></div>
+
+</div>
+
+<div class="flash" id="flash"></div>
+
+
+<main class="app">
+
+<!-- =================================================
+     PÁGINA 1 — PERGUNTA ORIGINAL
+================================================= -->
+
+<section class="card page active" id="page1">
+
+    <div class="badge">
+        ♥ UMA PERGUNTA ESPECIAL
+    </div>
+
+    <div class="heartStage">
+
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="ring"></div>
+
+        <div class="mainHeart">
+            🧸❤️
+        </div>
+
+    </div>
+
+    <h1>
+        Tenho uma coisa<br>
+        <span class="gradientText">
+            para te perguntar...
+        </span>
+    </h1>
+
+    <p class="description">
+        Pode parecer uma pergunta simples,
+        mas a sua resposta significa muito
+        para mim. Então pense com carinho. 💕
+    </p>
+
+    <div class="question">
+        Você aceita ser minha namorada? ❤️
+    </div>
+
+    <div class="buttons">
+
+        <button class="yes" id="yes1">
+            SIM ❤️
+        </button>
+
+        <button class="no" id="no1">
+            NÃO
+        </button>
+
+    </div>
+
+    <div class="hint" id="hint">
+        Escolha com cuidado... 👀
+    </div>
+
+    <div class="counter">
+        Tentativas de fugir:
+        <span id="attempts">0</span>
+    </div>
+
+</section>
+
+
+<!-- =================================================
+     PÁGINA 2 — CONFIRMAÇÃO
+================================================= -->
+
+<section class="card page" id="page2">
+
+    <div class="badge">
+        ♥ ESPERA UM POUQUINHO
+    </div>
+
+    <div class="confirmHeart">
+        🥹❤️
+    </div>
+
+    <h1>
+        Você quer mesmo?
+    </h1>
+
+    <p class="description">
+        Só quero ter certeza de que essa é
+        realmente a sua resposta. ❤️
+    </p>
+
+    <div class="loveQuotes">
+
+        <div class="quote">
+            <span>❤️</span>
+            "Você deixa meus dias muito mais especiais."
+        </div>
+
+        <div class="quote">
+            <span>💕</span>
+            "Meu sorriso fica diferente quando penso em você."
+        </div>
+
+        <div class="quote">
+            <span>💖</span>
+            "Entre tantas pessoas, meu coração escolheu você."
+        </div>
+
+        <div class="quote">
+            <span>🌹</span>
+            "Eu só quero viver momentos incríveis ao seu lado."
+        </div>
+
+    </div>
+
+    <div class="confirmButtons">
+
+        <button class="yes" id="yes2">
+            SIM, EU QUERO ❤️
+        </button>
+
+        <button class="secondary" id="back1">
+            Voltar
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =================================================
+     PÁGINA 3 — SEGUNDA CHANCE
+================================================= -->
+
+<section class="card page" id="page3">
+
+    <div class="badge">
+        🥺 SÓ MAIS UMA CHANCE
+    </div>
+
+    <div class="secondChanceIcon">
+        🥺💔
+    </div>
+
+    <div class="secondTitle">
+        Me dá uma<br>
+        segunda chance? ❤️
+    </div>
+
+    <p class="secondText">
+        Eu sei que você clicou em NÃO...
+        mas será que pode pensar mais um pouquinho?
+        <br><br>
+        Talvez o meu coração esteja pedindo
+        só mais uma oportunidade. 🥺
+    </p>
+
+    <div class="plea">
+        Por favor... me dá uma segunda chance. ❤️
+    </div>
+
+    <div class="confirmButtons">
+
+        <button class="yes" id="chance">
+            Dar uma chance ❤️
+        </button>
+
+        <button class="secondary" id="stayNo">
+            Ainda não...
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =================================================
+     PÁGINA 4 — FINAL
+================================================= -->
+
+<section class="card page" id="page4">
+
+    <div class="successHeart">
+        💖
+    </div>
+
+    <div class="badge">
+        ♥ RESPOSTA CERTA
+    </div>
+
+    <div class="successTitle">
+        EU SABIA! 😍
+    </div>
+
+    <p class="successText">
+        Você acabou de deixar meu coração
+        completamente feliz. ❤️
+        <br><br>
+        Que esse seja apenas o começo de
+        uma história cheia de carinho,
+        risadas, momentos inesquecíveis
+        e muito amor. 🥰
+        <br><br>
+        Obrigado por escolher ficar comigo. 💕
+    </p>
+
+    <button class="secondary" onclick="location.reload()">
+        ↻ Ver novamente
+    </button>
+
+</section>
+
+</main>
+
+
+<script>
+
+/* =================================================
+   ESTRELAS
+================================================= */
+
+const stars =
+document.getElementById("stars");
+
+for(let i=0;i<90;i++){
+
+    const star =
+    document.createElement("div");
+
+    star.className="star";
+
+    star.style.left =
+        Math.random()*100+"%";
+
+    star.style.top =
+        Math.random()*100+"%";
+
+    star.style.animationDelay =
+        Math.random()*3+"s";
+
+    star.style.animationDuration =
+        (1+Math.random()*3)+"s";
+
+    stars.appendChild(star);
+}
+
+
+/* =================================================
+   CORAÇÕES
+================================================= */
+
+const hearts =
+document.getElementById("hearts");
+
+const heartList=[
+    "❤️",
+    "🩷",
+    "💗",
+    "💖",
+    "💕",
+    "💘"
+];
+
+function createHeart(){
+
+    const h =
+    document.createElement("div");
+
+    h.className="heart";
+
+    h.textContent =
+        heartList[
+            Math.floor(
+                Math.random()*heartList.length
+            )
+        ];
+
+    h.style.left =
+        Math.random()*100+"vw";
+
+    h.style.fontSize =
+        (13+Math.random()*28)+"px";
+
+    h.style.animationDuration =
+        (6+Math.random()*7)+"s";
+
+    h.style.animationDelay =
+        Math.random()*2+"s";
+
+    hearts.appendChild(h);
+
+    setTimeout(
+        ()=>h.remove(),
+        15000
+    );
+}
+
+setInterval(createHeart,300);
+
+for(let i=0;i<25;i++){
+    createHeart();
+}
+
+
+/* =================================================
+   TROCA DE PÁGINAS
+================================================= */
+
+function showPage(id){
+
+    document.querySelectorAll(".page")
+        .forEach(page=>{
+            page.classList.remove("active");
+        });
+
+    const page =
+        document.getElementById(id);
+
+    page.classList.add("active");
+
+    window.scrollTo(0,0);
+}
+
+
+/* =================================================
+   BOTÃO NÃO — PRIMEIRA PÁGINA
+================================================= */
+
+const no1 =
+document.getElementById("no1");
+
+const hint =
+document.getElementById("hint");
+
+const attempts =
+document.getElementById("attempts");
+
+let count=0;
+
+const phrases=[
+    "Tem certeza disso? 👀",
+    "Esse botão não vale! 😂",
+    "Você deveria tentar o SIM ❤️",
+    "Quase me pegou! 😏",
+    "Não adianta fugir... 💕",
+    "O SIM está logo ali! 😍",
+    "Você realmente quer dizer não? 🥺",
+    "Última chance! ❤️"
+];
+
+function moveNo(){
+
+    count++;
+
+    attempts.textContent=count;
+
+    no1.style.position="fixed";
+
+    const padding=15;
+
+    const maxX=
+        window.innerWidth -
+        no1.offsetWidth -
+        padding;
+
+    const maxY=
+        window.innerHeight -
+        no1.offsetHeight -
+        padding;
+
+    const x=
+        padding+
+        Math.random()*
+        Math.max(1,maxX-padding);
+
+    const y=
+        padding+
+        Math.random()*
+        Math.max(1,maxY-padding);
+
+    no1.style.left=x+"px";
+    no1.style.top=y+"px";
+
+    hint.textContent=
+        phrases[
+            Math.min(
+                count-1,
+                phrases.length-1
+            )
+        ];
+}
+
+
+/* PC */
+no1.addEventListener(
+    "mouseenter",
+    moveNo
+);
+
+
+/* CELULAR */
+no1.addEventListener(
+    "touchstart",
+    function(e){
+
+        e.preventDefault();
+
+        /*
+         * Em celular, em vez de apagar
+         * ou substituir a página original,
+         * abrimos a página de segunda chance.
+         */
+        showPage("page3");
+
+    },
+    {passive:false}
+);
+
+
+/* =================================================
+   SIM DA PRIMEIRA PÁGINA
+================================================= */
+
+document
+.getElementById("yes1")
+.addEventListener(
+    "click",
+    ()=>{
+
+        showPage("page2");
+
+    }
+);
+
+
+/* =================================================
+   SIM DA SEGUNDA PÁGINA
+================================================= */
+
+document
+.getElementById("yes2")
+.addEventListener(
+    "click",
+    ()=>{
+
+        document
+        .getElementById("flash")
+        .classList.add("active");
+
+        setTimeout(()=>{
+
+            showPage("page4");
+
+            launchConfetti();
+
+        },180);
+
+    }
+);
+
+
+/* =================================================
+   VOLTAR DA CONFIRMAÇÃO
+================================================= */
+
+document
+.getElementById("back1")
+.addEventListener(
+    "click",
+    ()=>{
+
+        showPage("page1");
+
+    }
+);
+
+
+/* =================================================
+   SEGUNDA CHANCE
+================================================= */
+
+document
+.getElementById("chance")
+.addEventListener(
+    "click",
+    ()=>{
+
+        showPage("page2");
+
+    }
+);
+
+
+/* =================================================
+   AINDA NÃO
+================================================= */
+
+document
+.getElementById("stayNo")
+.addEventListener(
+    "click",
+    ()=>{
+
+        const icon =
+        document.querySelector(
+            ".secondChanceIcon"
+        );
+
+        icon.innerText="🥺❤️";
+
+        document.querySelector(
+            ".plea"
+        ).innerText=
+        "Por favor... pensa mais uma vez. ❤️";
+
+    }
+);
+
+
+/* =================================================
+   CONFETES
+================================================= */
+
+function launchConfetti(){
+
+    const pieces=[
+        "❤️",
+        "💖",
+        "💕",
+        "💗",
+        "💘",
+        "🌹",
+        "✨",
+        "💫"
+    ];
+
+    for(let i=0;i<130;i++){
+
+        const c=
+        document.createElement("div");
+
+        c.className="confetti";
+
+        c.textContent=
+            pieces[
+                Math.floor(
+                    Math.random()*pieces.length
+                )
+            ];
+
+        c.style.left=
+            Math.random()*100+"vw";
+
+        c.style.fontSize=
+            (10+Math.random()*24)+"px";
+
+        c.style.setProperty(
+            "--x",
+            (Math.random()*240-120)+"px"
+        );
+
+        c.style.animationDuration=
+            (2+Math.random()*3)+"s";
+
+        c.style.animationDelay=
+            Math.random()*1.2+"s";
+
+        document.body.appendChild(c);
+
+        setTimeout(
+            ()=>c.remove(),
+            6000
+        );
+    }
+}
+
+
+/* =================================================
+   EFEITO DO SIM
+================================================= */
+
+setInterval(()=>{
+
+    const yes =
+    document.querySelector(
+        ".yes"
+    );
+
+    if(
+        yes &&
+        yes.offsetParent!==null
+    ){
+
+        yes.animate(
+            [
+                {
+                    boxShadow:
+                    "0 12px 25px rgba(0,170,70,.25)"
+                },
+                {
+                    boxShadow:
+                    "0 12px 35px rgba(0,210,90,.55)"
+                },
+                {
+                    boxShadow:
+                    "0 12px 25px rgba(0,170,70,.25)"
+                }
+            ],
+            {
+                duration:1800
+            }
+        );
+
+    }
+
+},3000);
+
+</script>
+
+</body>
+</html>
